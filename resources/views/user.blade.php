@@ -2,9 +2,34 @@
 
 @section('content')
 <div class="container">
-  <div class="row flex-lg-row-reverse align-items-center">
-    <div>
-        <table id="myTable" class="table">
+  <div class="row flex-lg align-items-center">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body d-flex justify-content-center">
+            <form action="{{ route('user.import') }}" method="post" enctype="multipart/form-data">
+              @csrf
+              <label for="file" class="d-flex justify-content-center pb-2">Import Data</label>
+              <input type="file" name="file" class="form-control"  required>
+              <div class="d-flex justify-content-center">
+                <button class="btn btn-info mt-2">Import</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <label for="export" class="d-flex justify-content-center">Export Data</label>
+            <div class="d-flex justify-content-center">
+              <a href="{{ route('user.export') }}">
+                <button class="btn btn-success mt-2">Export</button>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <table id="myTable" class="table">
             <thead>
                 <th>#</th>
                 <th>Name</th>
@@ -23,11 +48,9 @@
             </tr>
             @endforeach 
             </tbody>
-        </table>
-    </div>
+      </table>
   </div>
 </div>
-
 <script>
   $(document).ready( function () {
     $('#myTable').DataTable();
